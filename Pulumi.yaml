@@ -1,0 +1,10 @@
+name: ftr-pulumi-iac
+description: Projeto Rocktseat Pos
+runtime:
+  name: nodejs
+  options:
+    packagemanager: pnpm
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: aws-typescript

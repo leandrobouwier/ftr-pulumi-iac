@@ -1,0 +1,101 @@
+import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "../types/input";
+import * as pulumiAws from "@pulumi/aws";
+export declare class Trail extends pulumi.ComponentResource {
+    /**
+     * Returns true if the given object is an instance of Trail.  This is designed to work even
+     * when multiple copies of the Pulumi SDK have been loaded into the same process.
+     */
+    static isInstance(obj: any): obj is Trail;
+    /**
+     * The managed S3 Bucket where the Trail will place its logs.
+     */
+    readonly bucket: pulumi.Output<pulumiAws.s3.Bucket | undefined>;
+    /**
+     * The managed Cloudwatch Log Group.
+     */
+    readonly logGroup: pulumi.Output<pulumiAws.cloudwatch.LogGroup | undefined>;
+    /**
+     * The CloudTrail Trail.
+     */
+    readonly trail: pulumi.Output<pulumiAws.cloudtrail.Trail>;
+    /**
+     * Create a Trail resource with the given unique name, arguments, and options.
+     *
+     * @param name The _unique_ name of the resource.
+     * @param args The arguments to use to populate this resource's properties.
+     * @param opts A bag of options that control this resource's behavior.
+     */
+    constructor(name: string, args?: TrailArgs, opts?: pulumi.ComponentResourceOptions);
+}
+/**
+ * The set of arguments for constructing a Trail resource.
+ */
+export interface TrailArgs {
+    /**
+     * Specifies an advanced event selector for enabling data event logging. Fields documented below. Conflicts with <span pulumi-lang-nodejs="`eventSelector`" pulumi-lang-dotnet="`EventSelector`" pulumi-lang-go="`eventSelector`" pulumi-lang-python="`event_selector`" pulumi-lang-yaml="`eventSelector`" pulumi-lang-java="`eventSelector`">`event_selector`</span>.
+     */
+    advancedEventSelectors?: pulumi.Input<pulumi.Input<pulumiAws.types.input.cloudtrail.TrailAdvancedEventSelector>[]>;
+    /**
+     * Log group to which CloudTrail logs will be delivered.
+     */
+    cloudWatchLogsGroup?: inputs.awsx.OptionalLogGroupArgs;
+    /**
+     * Whether log file integrity validation is enabled. Defaults to <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`">`false`</span>.
+     */
+    enableLogFileValidation?: pulumi.Input<boolean>;
+    /**
+     * Enables logging for the trail. When set to <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`">`true`</span>, logging is started by calling the [`StartLogging`](https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_StartLogging.html) API. When set to <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`">`false`</span>, logging is stopped by calling the [`StopLogging`](https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_StopLogging.html) API. Defaults to <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`">`true`</span>.
+     */
+    enableLogging?: pulumi.Input<boolean>;
+    /**
+     * Specifies an event selector for enabling data event logging. Fields documented below. Please note the [CloudTrail limits](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html) when configuring these. Conflicts with <span pulumi-lang-nodejs="`advancedEventSelector`" pulumi-lang-dotnet="`AdvancedEventSelector`" pulumi-lang-go="`advancedEventSelector`" pulumi-lang-python="`advanced_event_selector`" pulumi-lang-yaml="`advancedEventSelector`" pulumi-lang-java="`advancedEventSelector`">`advanced_event_selector`</span>.
+     */
+    eventSelectors?: pulumi.Input<pulumi.Input<pulumiAws.types.input.cloudtrail.TrailEventSelector>[]>;
+    /**
+     * Whether the trail is publishing events from global services such as IAM to the log files. Defaults to <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`">`true`</span>.
+     */
+    includeGlobalServiceEvents?: pulumi.Input<boolean>;
+    /**
+     * Configuration block for identifying unusual operational activity. See details below.
+     */
+    insightSelectors?: pulumi.Input<pulumi.Input<pulumiAws.types.input.cloudtrail.TrailInsightSelector>[]>;
+    /**
+     * Whether the trail is created in the current region or in all regions. Defaults to <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`">`false`</span>.
+     */
+    isMultiRegionTrail?: pulumi.Input<boolean>;
+    /**
+     * Whether the trail is an AWS Organizations trail. Organization trails log events for the master account and all member accounts. Can only be created in the organization master account. Defaults to <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`">`false`</span>.
+     */
+    isOrganizationTrail?: pulumi.Input<boolean>;
+    /**
+     * KMS key ARN to use to encrypt the logs delivered by CloudTrail.
+     */
+    kmsKeyId?: pulumi.Input<string>;
+    /**
+     * Name of the trail.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Region where this resource will be [managed](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints). Defaults to the Region set in the provider configuration.
+     */
+    region?: pulumi.Input<string>;
+    /**
+     * S3 bucket designated for publishing log files.
+     */
+    s3Bucket?: inputs.awsx.RequiredBucketArgs;
+    /**
+     * S3 key prefix that follows the name of the bucket you have designated for log file delivery.
+     */
+    s3KeyPrefix?: pulumi.Input<string>;
+    /**
+     * Name of the Amazon SNS topic defined for notification of log file delivery. Specify the SNS topic ARN if it resides in another region.
+     */
+    snsTopicName?: pulumi.Input<string>;
+    /**
+     * Map of tags to assign to the trail. If configured with a provider <span pulumi-lang-nodejs="`defaultTags`" pulumi-lang-dotnet="`DefaultTags`" pulumi-lang-go="`defaultTags`" pulumi-lang-python="`default_tags`" pulumi-lang-yaml="`defaultTags`" pulumi-lang-java="`defaultTags`">`default_tags`</span> configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+     */
+    tags?: pulumi.Input<{
+        [key: string]: pulumi.Input<string>;
+    }>;
+}
