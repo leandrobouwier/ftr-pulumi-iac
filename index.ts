@@ -1,8 +1,16 @@
 import * as aws from "@pulumi/aws";
 
 // Create an AWS resource (S3 Bucket)
-const bucket = new aws.s3.Bucket("primeiro-bucket", {
+const firstBucket = new aws.s3.Bucket("primeiro-bucket", {
     bucket: 'primeiro-bucket-pos-full',
+    tags: {
+        IAC: "true"
+    }
+
+});
+
+const secondBucket = new aws.s3.Bucket("segundo-bucket", {
+    bucket: 'segundo-bucket-pos-full',
     tags: {
         IAC: "true"
     }
@@ -17,9 +25,13 @@ const ecr = new aws.ecr.Repository("primeiro-ecr", {
     }
 })
 
-export const bucketName = bucket.id;
-export const bucketRegion = bucket.region;
-export const bucketArn = bucket.arn;
+export const firstBucketName = firstBucket.id;
+export const firstBucketRegion = firstBucket.region;
+export const firstBucketArn = firstBucket.arn;
+
+export const secondBucketName = secondBucket.id;
+export const secondBucketRegion = secondBucket.region;
+export const secondBucketArn = secondBucket.arn;
 
 export const ecrName = ecr.name
 export const ecrepositoryUrl = ecr.repositoryUrl
