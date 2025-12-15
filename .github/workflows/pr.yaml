@@ -8,6 +8,9 @@ on:
 jobs:
   preview:
     runs-on: ubuntu-latest
+    permissions:
+        contents: read      # Para ler o código
+        pull-requests: write # Para o Pulumi comentar no PR
     steps:
       - name: Checkout
         id: checkout
