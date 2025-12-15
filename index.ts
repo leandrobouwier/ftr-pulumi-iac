@@ -9,13 +9,6 @@ const firstBucket = new aws.s3.Bucket("primeiro-bucket", {
 
 });
 
-const secondBucket = new aws.s3.Bucket("segundo-bucket", {
-    bucket: 'segundo-bucket-pos-full',
-    tags: {
-        IAC: "true"
-    }
-
-});
 
 const ecr = new aws.ecr.Repository("primeiro-ecr", {
     name: 'primeiro-ecr-pos-full',
@@ -29,9 +22,7 @@ export const firstBucketName = firstBucket.id;
 export const firstBucketRegion = firstBucket.region;
 export const firstBucketArn = firstBucket.arn;
 
-export const secondBucketName = secondBucket.id;
-export const secondBucketRegion = secondBucket.region;
-export const secondBucketArn = secondBucket.arn;
+
 
 export const ecrName = ecr.name
 export const ecrepositoryUrl = ecr.repositoryUrl
