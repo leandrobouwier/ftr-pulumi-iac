@@ -23,6 +23,7 @@ const ecr = new aws.ecr.Repository("primeiro-ecr", {
     tags: {
         IAC: "true",
     }
+    
 })
 
 export const firstBucketName = firstBucket.id;
